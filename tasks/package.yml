@@ -1,0 +1,40 @@
+# This source file is subject to the (Open Source Initiative) BSD license
+# that is bundled with this package in the LICENSE file. It is also available
+# through the world-wide-web at this URL: http://www.ontic.com.au/license.html
+# If you did not receive a copy of the license and are unable to obtain it through
+# the world-wide-web, please send an email to license@ontic.com.au immediately.
+# Copyright (c) 2010-2016 Ontic. (http://www.ontic.com.au). All rights reserved.
+
+---
+
+- name: 'Logrotate | Debian | Install Logrotate packages.'
+  become: yes
+  apt:
+    name: '{{ item.name if item.version is not defined else item.name + "=" + item.version }}'
+    cache_valid_time: '{{ item.cache_valid_time | default(omit) }}'
+    deb: '{{ item.deb | default(omit) }}'
+    default_release: '{{ item.default_release | default(omit) }}'
+    dpkg_options: '{{ item.dpkg_options | default(omit) }}'
+    force: '{{ item.force | default(omit) }}'
+    install_recommends: '{{ item.install_recommends | default(omit) }}'
+    purge: '{{ item.purge | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'
+    update_cache: '{{ item.update_cache | default(omit) }}'
+    upgrade: '{{ item.upgrade | default(omit) }}'
+  with_items: '{{ logrotate_packages }}'
+  when: '{{ ansible_os_family == "Debian" }}'
+
+- name: 'Logrotate | RedHat | Install Logrotate packages.'
+  become: yes
+  yum:
+    name: '{{ item.name if item.version is not defined else item.name + "-" + item.version }}'
+    conf_file: '{{ item.conf_file | default(omit) }}'
+    disable_gpg_check: '{{ item.disable_gpg_check | default(omit) }}'
+    disablerepo: '{{ item.disablerepo | default(omit) }}'
+    enablerepo: '{{ item.enablerepo | default(omit) }}'
+    exclude: '{{ item.exclude | default(omit) }}'
+    list: '{{ item.list | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'
+    update_cache: '{{ item.update_cache | default(omit) }}'
+  with_items: '{{ logrotate_packages }}'
+  when: '{{ ansible_os_family == "RedHat" }}'
