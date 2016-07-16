@@ -7,7 +7,8 @@ logrotate_config_files:
   - name: 'legacy'
     state: 'absent'
   - name: 'magento'
-    paths: '/home/user/magento/public/var/*.log'
+    paths:
+      - '/home/user/magento/public/var/*.log'
     force: yes
     options:
       - 'compress'
@@ -17,7 +18,8 @@ logrotate_config_files:
       - 'notifempty'
       - 'rotate 5'
   - name: 'nginx'
-    paths: '/var/log/nginx/*.log'
+    paths:
+      - '/var/log/nginx/*.log'
     options:
       - 'compress'
       - 'create 0640 nobody adm'

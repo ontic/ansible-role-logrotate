@@ -1,7 +1,6 @@
 # {{ ansible_managed }}
 
-{% set paths = item.paths | list %}
-{% for path in paths %}
+{% for path in item.paths %}
 {{ path }}
 {% endfor %}
 {
