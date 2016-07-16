@@ -16,17 +16,6 @@
     - 'package'
     - 'configure'
 
-- name: 'Logrotate | Define Logrotate service name.'
-  set_fact:
-    logrotate_service_name: '{{ logrotate_default_service_name }}'
-  when: '{{ not logrotate_service_name }}'
-  tags:
-    - 'logrotate'
-    - 'logrotate-package'
-    - 'logrotate-configure'
-    - 'package'
-    - 'configure'
-
 - name: 'Logrotate | Define Logrotate packages.'
   set_fact:
     logrotate_packages: '{{ logrotate_default_packages }}'
