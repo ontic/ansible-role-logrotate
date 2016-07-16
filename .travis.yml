@@ -40,7 +40,6 @@ script:
     | tee /tmp/output.txt; grep -q "changed=0.*unreachable=0.*failed=0" /tmp/output.txt
     && (echo "Idempotence test: Passed" && exit 0)
     || (echo "Idempotence test: Failed" && exit 1)
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm logrotate'
   - 'sudo docker stop "$(cat ${container_id})"'
 
 notifications:
