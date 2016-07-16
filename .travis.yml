@@ -43,9 +43,4 @@ script:
   - 'sudo docker stop "$(cat ${container_id})"'
 
 notifications:
-  webhooks:
-    urls:
-      - 'https://galaxy.ansible.com/api/v1/notifications/'
-    on_success: 'always'
-    on_failure: 'never'
-    on_start: 'never'
+  webhooks: 'https://galaxy.ansible.com/api/v1/notifications/'
