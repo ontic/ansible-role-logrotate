@@ -1,14 +1,17 @@
 # {{ ansible_managed }}
 
-{% for path in item.paths | list %}
+{% set paths = item.paths | list %}
+{% for path in paths %}
 {{ path }}
 {% endfor %}
 {
+	
 	{% if item.options is defined %}
 	{% for option in item.options %}
 	{{ option }}
 	{% endfor %}
 	{% endif %}
+	
 	{% if item.scripts is defined %}
 	{% for name, script in item.scripts.iteritems() %}
 	{{ name }}
@@ -16,4 +19,5 @@
 	endscript
 	{% endfor %}
 	{% endif %}
+	
 }
