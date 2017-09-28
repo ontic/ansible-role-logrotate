@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Verify the entry is added to crontab.
-docker exec --tty ${container_id} env TERM=xterm crontab -u adam -l
+# Verify the installed version of logrotate.
+docker exec --tty ${container_id} env TERM=xterm /usr/sbin/logrotate --version
