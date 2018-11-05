@@ -8,15 +8,27 @@
   template:
     src: '{{ item.template | default(logrotate_config_template) }}'
     dest: '{{ logrotate_conf_path }}/{{ item.name }}'
-    state: '{{ item.state | default(omit) }}'
     owner: 'root'
     group: 'root'
     mode: '0644'
   with_items: '{{ logrotate_config_files }}'
   when: 'logrotate_config_files | default(None) != None'
 
+- name: 'Logrotate | Configure absent config files.'
+  become: yes
+  file:
+    path: '{{ logrotate_conf_path }}/{{ item.name }}'
+    state: 'absent'
+  with_items: '{{ logrotate_config_files }}'
+  when:
+    - 'logrotate_config_files | default(None) != None'
+    - 'item.state | default("present") == "absent"'
+
 - name: 'Logrotate | Force file rotation.'
   become: yes
   command: 'logrotate --force {{ logrotate_conf_path }}/{{ item.name }}'
   with_items: '{{ logrotate_config_files }}'
-  when: 'logrotate_config_files | default(None) != None and (logrotate_force_all or item.force is defined and item.force)'
+  when:
+    - 'logrotate_config_files | default(None) != None'
+    - 'item.state | default("present") == "present"'
+    - 'logrotate_force_all or item.force is defined and item.force'

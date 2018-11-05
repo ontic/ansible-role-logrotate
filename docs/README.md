@@ -3,10 +3,12 @@
 ## Example
 
 ```
+custom_template: 'custom-template.j2'
 logrotate_config_files:
   - name: 'legacy'
     state: 'absent'
   - name: 'magento'
+    template: custom_template
     paths:
       - '/home/user/magento/public/var/*.log'
     force: yes
