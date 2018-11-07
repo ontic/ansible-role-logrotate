@@ -76,6 +76,7 @@ you to do so by making a [pull](../../pulls) request or submitting an [issue](..
 
 * [Adam Dyson](https://github.com/adamdyson)
 * [Evgeny Lebedev](https://github.com/lebe-dev)
+* [Jørgen van der Meulen](https://github.com/jvandermeulen)
 
 ## License
 

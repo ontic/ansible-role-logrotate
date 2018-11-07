@@ -12,7 +12,10 @@
     group: 'root'
     mode: '0644'
   with_items: '{{ logrotate_config_files }}'
-  when: 'logrotate_config_files | default(None) != None'
+  when:
+    - 'logrotate_config_files | default(None) != None'
+    - 'item.paths is defined'
+
 
 - name: 'Logrotate | Configure absent config files.'
   become: yes
